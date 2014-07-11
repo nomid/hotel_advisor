@@ -2,7 +2,7 @@ HotelAdvisor::Application.routes.draw do
 
   resource :hotels
   devise_for :users
-  root  'hotels#index'
+  root  'static_pages#home'
   match '/top', to: 'static_pages#top', via: 'get'
   get '/profile' => 'users#profile', as: 'user_root'
   

@@ -25,14 +25,14 @@ describe "StaticPages" do
 
 		describe "should list of hotels" do
 
-	      	before(:all) { 30.times { FactoryGirl.create(:hotel) } }
+	      	before(:all) { 35.times { FactoryGirl.create(:hotel) } }
 	      	after(:all)  { Hotel.delete_all }
 
 	      	it { should have_selector('div.pagination') }
 
 	      	it "should list each hotel" do
-		        Hotel.paginate(page: 1).each do |user|
-		          	expect(page).to have_selector('li', text: hotel.title)
+		        Hotel.paginate(page: 1).each do |hotel|
+		          	expect(page).to have_selector('li.hotel_title', text: hotel.title)
 		        end
 	      	end
 	    end
