@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
-  def profile
-  end
+  	def show
+  		@user = current_user
+  	end
 end

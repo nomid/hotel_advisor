@@ -32,9 +32,27 @@ describe "StaticPages" do
 
 	      	it "should list each hotel" do
 		        Hotel.paginate(page: 1).each do |hotel|
-		          	expect(page).to have_selector('li.hotel_title', text: hotel.title)
+		          	expect(page).to have_selector('table .hotel_title', text: hotel.title)
 		        end
 	      	end
 	    end
 	end
-end
+
+	describe "Top 5 page" do
+		before do 
+			visit top_path
+			35.times { FactoryGirl.create(:hotel) }
+		end
+		after  { Hotel.delete_all }
+
+		it { should_not have_selector('div.pagination') }
+		it "should list 5 hotels" do
+			expect(page).to have_css('table.hotel', maximum: 5)
+		end
+		#it "should be in right order" do
+		#	hotels = Hotel.order('rating DESC').limit(5)
+		#	first = page.first('.hotel_title a').text
+		#	it { hotels.first.title.to eq first }
+		#end
+	end
+end	

@@ -1,0 +1,21 @@
+<h1>My profile</h1>
+<div class="profile">
+	<table>
+		<tbody>
+			<tr>
+				<td>Username:</td>
+				<td><%= @user.username %></td>
+			</tr>
+			<tr>
+				<td>Email:</td>
+				<td><%= @user.email %></td>
+			</tr>
+
+			<tr>
+				<td class="edit_profile" colspan="2">
+					<%= link_to 'Edit profile', edit_user_registration_path %>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

@@ -1,6 +1,6 @@
 @import "bootstrap";
 
-
+/*list of hotels*/
 body div.container{
 	text-align: center;
 }
@@ -18,4 +18,18 @@ body div.container{
 }
 .hotel .rating{
 	text-align: left;
+}
+
+/*profile*/
+.profile table td{
+	padding: 0 5px;
+}
+.profile table{
+	margin: 0 auto;
+	font-size: 20px;
+	text-align: left;
+}
+.edit_profile{
+	padding-top: 15px !important;
+	text-align: center;
 }
