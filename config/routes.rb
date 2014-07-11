@@ -1,4 +1,11 @@
 HotelAdvisor::Application.routes.draw do
+
+  resource :hotels
+  devise_for :users
+  root  'hotels#index'
+  match '/top', to: 'static_pages#top', via: 'get'
+  get '/profile' => 'users#profile', as: 'user_root'
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

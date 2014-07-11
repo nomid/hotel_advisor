@@ -1,0 +1,43 @@
+<header>
+	<div class="row-fluid">
+		<div class="span4 offset8">
+			<h1>Hotel adviser</h1>
+		</div>
+	</div>	
+	<div class="row">
+		<header class="navbar navbar-inverse">
+		  <div class="navbar-inner">
+		    <div class="container">
+		      <nav>
+		        <ul class="nav pull-left">
+		          <li><%= link_to "Home", root_path %></li>
+		        </ul>
+		        <% if signed_in? %>
+			        <ul class="nav pull-right">
+			        	<li id="fat-menu" class="dropdown">
+			              	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+			                Hello, <%= current_user.username %>! <b class="caret"></b>
+			              	</a>
+			              	<ul class="dropdown-menu">
+				                <li><a href="#">My profile</a></li>
+				                <li><a href="#">Add hotel</a></li>
+				                <li><a href="#">My hotels</a></li>
+		              		</ul>
+			            </li>
+			            <li><%= link_to "Exit", destroy_user_session_path, :method => :delete %></li>
+			        </ul>
+		        <% else %>
+		        	<ul class="nav pull-right">
+			          <li><%= link_to "Sign in", new_user_session_path %></li>
+			          <li><%= link_to "Sign up", new_user_registration_path %></li>
+			        </ul>
+		        <% end %>
+		      </nav>
+		    </div>
+		  </div>
+		</header>
+	</div>
+	<p class="notice"><%= notice %></p>
+	<p class="alert"><%= alert %></p>
+
+</header>

@@ -1,0 +1,14 @@
+<% provide(:title, 'Home page') %>
+<h1>All hotels</h1>
+
+<%= will_paginate @hotels %>
+
+<ul class="hotels">
+    <%= render @hotels %>
+    <%= @hotels %>
+    <% @hotels.each do |v| %>
+    	<%= v.title %>
+    <% end %>
+</ul>
+
+<%= will_paginate @hotels %>
