@@ -11,19 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140711105410) do
+ActiveRecord::Schema.define(version: 20140712110346) do
+
+  create_table "comments", force: true do |t|
+    t.integer  "hotel_id"
+    t.integer  "user_id"
+    t.string   "comment"
+    t.integer  "rate"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "hotels", force: true do |t|
     t.string   "title"
+    t.integer  "star_rating"
     t.boolean  "breackfest"
     t.string   "room_desc"
     t.string   "photo"
     t.float    "price"
     t.string   "adress"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float    "rating"
-    t.integer  "star_rating"
   end
 
   create_table "users", force: true do |t|

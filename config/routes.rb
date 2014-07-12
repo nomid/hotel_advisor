@@ -1,6 +1,10 @@
 HotelAdvisor::Application.routes.draw do
 
-  resource :hotels
+  resource :hotels do
+    member do
+      get :myhotels
+    end
+  end 
   devise_for :users
   root  'static_pages#home'
   match '/top', to: 'static_pages#top', via: 'get'
