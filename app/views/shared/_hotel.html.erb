@@ -1,4 +1,3 @@
-
 <table class="hotel">
 	<tbody>
 		<tr>
@@ -8,13 +7,13 @@
 		</tr>
 		<tr>
 			<td class="rating">
-				Rating: <%= (Random.rand(499)+1).to_f / 100 %>
+				Rating: <%= object.get_rating %>
 			</td>
 			<td>
-				Comments:
+				Comments: <%= object.comments.count %>
 			</td>
 			<td class="star_rating">
-				Stars: *****
+				Stars: <%= '*' * object.star_rating %>
 			</td>
 		</tr>
 	</tbody>
