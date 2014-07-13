@@ -1,0 +1,24 @@
+<div class="hotel_box">
+	<h2><%= @hotel.title %></h2>	
+	Photo:<br/>
+	<%if @hotel.photo? %> 
+		<%= image_tag @hotel.photo_url.to_s %><br/>
+	<% else %>
+		No photo<br/>
+	<% end %>
+	<span>Stars: <%= '*' * @hotel.star_rating%></span><br/>
+	<span>Breackfest <%= 'not' unless @hotel.breackfest? %> include</span><br/>
+	<span>Price for room: <%= @hotel.price %></span><br/>
+	<span>Adress: <%= @hotel.adress %></span><br/>
+	<div>Room description:<br/><%= @hotel.room_desc%></div><br/>
+</div>
+<div class="comments">
+	<%= render @comments %>
+	<% if user_signed_in? %>
+		<% unless hotel_commented?(@hotel)%>
+			<%= render 'comments/add_comment' %>
+		<% else %>
+			<span>You have already rate this hotel</span>
+		<% end %>	
+	<% end %>
+</div>

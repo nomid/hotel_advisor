@@ -1,10 +1,11 @@
 HotelAdvisor::Application.routes.draw do
 
-  resource :hotels do
+  resource :hotel do
     member do
       get :myhotels
     end
   end 
+  resource :comment, only: [:create]
   devise_for :users
   root  'static_pages#home'
   match '/top', to: 'static_pages#top', via: 'get'

@@ -1,0 +1,8 @@
+<div class="add_comment">
+	<%= simple_form_for @comment, url:comment_path do |f| %>
+		<%= f.input :hotel_id, input_html: {value: @hotel.id, type: 'hidden'} %>
+		<%= f.input :comment, required: true, as: :text %>
+		<%= f.input :rate, collection: 1..5, as: :radio_buttons, required: true%>
+	  	<%= f.button :submit %>
+	<% end %>
+</div>

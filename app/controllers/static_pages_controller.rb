@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
   def home
-  	@hotels = Hotel.paginate(page: params[:page])
+  	@hotels = Hotel.paginate(page: params[:page]).order('title')
   end
 
   def top

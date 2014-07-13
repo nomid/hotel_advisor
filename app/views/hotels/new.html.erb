@@ -1,6 +1,7 @@
-<%= simple_form_for @hotel do |f| %>
+<%= simple_form_for @hotel, url: hotel_path, html: {multipart: true} do |f| %>
   <%= f.input :title, required: true %>
-  <%= f.input :breackfest%>
+  <%= f.input :photo, as: :file %>
+  <%= f.input :breackfest %>
   <%= f.input :room_desc, required: true %>
   <%#photo%>
   <%= f.input :price, required: true %>
