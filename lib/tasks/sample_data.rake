@@ -9,19 +9,23 @@ namespace :db do
 end
 
 def make_comments
-  comment = Comment.create!(hotel_id: 1,
-                            user_id: 1,
-                            comment: "example comment",
-                            rate: 5)
-  99.times do |n|
-    hotel_id = Random.rand(99) + 1
-    user_id = Random.rand(99) + 1
-    comment = "Example comment #{n+1}"
-    rate = Random.rand(4) + 1
-    Comment.create!(hotel_id: hotel_id,
-                    user_id: user_id,
-                    comment: comment,
-                    rate: rate)
+  count = 0
+  50.times do |u|
+    rated_hotels = Array.new
+    3.times do |n|
+      begin
+        hotel_id = Random.rand(1..100)
+      end while rated_hotels.include? hotel_id
+      rated_hotels.push hotel_id
+      user_id = u+1
+      comment = "Example comment #{count}"
+      rate = Random.rand(1..5)
+      Comment.create!(hotel_id: hotel_id,
+                      user_id: user_id,
+                      comment: comment,
+                      rate: rate)
+      count += 1
+    end
   end
 end
 
@@ -30,7 +34,7 @@ def make_users
                        email:    "login@login.ru",
                        password: "11111111",
                        password_confirmation: "11111111")
-  99.times do |n|
+  49.times do |n|
     name  = Faker::Name.name
     email = "example-#{n+1}@railstutorial.org"
     password  = "password111"
@@ -52,13 +56,13 @@ def make_hotels
                  user_id: 1)
     99.times do |n|
       title = "Example Hotel #{n+1}"
-      star_rating = Random.rand(4)+1
+      star_rating = Random.rand(1..5)
       breackfest = true
       room_desc = "Example desc #{n+1}"
       photo = "photo#{n+1}"
       price = 100+n
       adress = "Example adress#{n+1}"
-      user_id = Random.rand(99) + 1
+      user_id = Random.rand(1..50)
       Hotel.create!(title: title,
                  star_rating: star_rating,
                  breackfest: breackfest,
