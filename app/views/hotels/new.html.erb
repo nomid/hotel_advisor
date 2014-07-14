@@ -1,12 +1,5 @@
-<%= simple_form_for @hotel, url: hotel_path, html: {multipart: true} do |f| %>
-  <%= f.input :title, required: true %>
-  <%= f.input :photo, as: :file %>
-  <%= f.input :breackfest %>
-  <%= f.input :room_desc, required: true %>
-  <%#photo%>
-  <%= f.input :price, required: true %>
-  <%= f.input :adress, required: true %>
-  <%= f.input :star_rating, collection: 1..5, as: :radio_buttons, required: true%>
-  <%= f.button :submit, required: true %>
-<% end %>
+<% provide(:title, "New hotel") %>
+<h2>New hotel</h2>
+
+<%= render 'form' %>
 

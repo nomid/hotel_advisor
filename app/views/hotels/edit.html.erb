@@ -1,15 +1,6 @@
 <% provide(:title, "Edit hotel") %>
 <h1>Edit hotel</h1>
 
-<%= simple_form_for @hotel, url: hotel_path, html: {multipart: true} do |f| %>
-  <%= f.input :title, required: true %>
-  <%= f.input :photo, as: :file %>
-  <%= f.input :breackfest %>
-  <%= f.input :room_desc, required: true %>
-  <%= f.input :price, required: true %>
-  <%= f.input :adress, required: true %>
-  <%= f.input :star_rating, collection: 1..5, as: :radio_buttons, required: true%>
-  <%= f.button :submit, required: true %>
-  <%= f.input :id, as: :hidden %>
-<% end %>
+<% edit = true %>
+<%= render 'form' %>
 

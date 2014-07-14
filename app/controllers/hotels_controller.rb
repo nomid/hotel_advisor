@@ -10,11 +10,9 @@ class HotelsController < ApplicationController
 	end
 
 	def create
-		#@hotel = Hotel.new(hotels_params)
 		@hotel = current_user.hotels.build(hotels_params)
 		@hotel.save!
-		redirect_to root_url	
-		
+		redirect_to myhotels_hotel_path	
 	end
 
 	def myhotels
@@ -26,17 +24,15 @@ class HotelsController < ApplicationController
 	end
 
 	def update
-		#todo: protect from notaccessed edit
 		@hotel = current_user.hotels.find(params[:hotel][:id])
-		if !@hotel
-			redirect_to root_path
+		if @hotel
+			if @hotel.update_attributes(hotels_params)
+	      		flash[:success] = "Hotel updated"
+	      		redirect_to myhotels_hotel_path
+		    else
+	      		render 'edit'
+		    end
 		end
-		if @hotel.update_attributes(hotels_params)
-      		flash[:success] = "Hotel updated"
-      		redirect_to myhotels_hotel_path
-	    else
-      		render 'edit'
-	    end
 	end
 
 	def destroy

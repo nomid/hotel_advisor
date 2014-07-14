@@ -3,7 +3,7 @@ class Hotel < ActiveRecord::Base
 	has_many :comments, dependent: :destroy
 	validates :title, presence: true, uniqueness:{ case_sensitive: false }
 	validates :room_desc, presence: true, length: {maximum: 200}
-	validates :price, presence: true
+	validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
 	validates :adress, presence: true, length: {maximum: 60}
 	validates :star_rating, presence: true, inclusion: {in: 1..5}
 	mount_uploader :photo, PhotoUploader
@@ -22,5 +22,4 @@ class Hotel < ActiveRecord::Base
 		'%.2f' % (summ.to_f / n)
 	end
 
-	
 end
