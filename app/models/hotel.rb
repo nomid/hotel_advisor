@@ -21,4 +21,6 @@ class Hotel < ActiveRecord::Base
 		end
 		'%.2f' % (summ.to_f / n)
 	end
+
+	
 end
