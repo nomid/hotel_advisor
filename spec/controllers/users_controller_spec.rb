@@ -1,12 +1,11 @@
 require 'spec_helper'
 
 describe UsersController do
+  let(:user) { FactoryGirl.create(:user) }
+  before { sign_in user }
 
-  describe "GET 'profile'" do
-    it "returns http success" do
-      get 'profile'
-      response.should be_success
-    end
+  it 'should render show template' do
+    get 'show'
+    response.should render_template('show')
   end
-
 end
