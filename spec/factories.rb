@@ -17,5 +17,10 @@ FactoryGirl.define do
       sequence(:user_id) { |n| n}
   	end
 
-    
+    factory :comment do
+      sequence(:hotel_id) { |n| n}
+      sequence(:user_id) { |n| n}
+      rate Random.rand(1..5)
+      comment "example comment"
+    end
 end

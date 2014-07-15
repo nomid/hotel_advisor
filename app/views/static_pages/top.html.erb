@@ -2,4 +2,10 @@
 
 <h1>Top hotels</h1>
 
-<%= render 'hotels' %>
+<div class="top_hotels">
+	<% if @hotels.nil? %>
+		<h3>No rated hotels</h3>
+	<% else %>
+		<%= render 'hotels' %>	
+	<% end %>
+</div>

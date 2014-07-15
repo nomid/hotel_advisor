@@ -10,16 +10,16 @@ end
 
 def make_comments
   count = 0
-  50.times do |u|
+  5.times do |u|
     rated_hotels = Array.new
     3.times do |n|
-      begin
-        hotel_id = Random.rand(1..100)
-      end while rated_hotels.include? hotel_id
+      #begin
+        hotel_id = u+1#Random.rand(1..100)
+      #end while rated_hotels.include? hotel_id
       rated_hotels.push hotel_id
       user_id = u+1
       comment = "Example comment #{count}"
-      rate = Random.rand(1..5)
+      rate = Random.rand(1..u+1)
       Comment.create!(hotel_id: hotel_id,
                       user_id: user_id,
                       comment: comment,

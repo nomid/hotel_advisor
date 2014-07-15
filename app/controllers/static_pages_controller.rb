@@ -5,7 +5,6 @@ class StaticPagesController < ApplicationController
   end
 
   def top
-    ids = get_top_5_ids
-    @hotels = Hotel.find(ids).index_by(&:id).slice(*ids).values
+    @hotels = Hotel::top_5
   end
 end

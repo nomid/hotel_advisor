@@ -9,6 +9,24 @@ class Hotel < ActiveRecord::Base
   validates :user_id, presence: true
   mount_uploader :photo, PhotoUploader
 
+  def self.top_5
+    sql = 'SELECT hotel_id 
+          FROM comments 
+          GROUP BY hotel_id 
+          ORDER BY AVG(rate) DESC, 
+                   COUNT(hotel_id) DESC 
+          LIMIT 5'
+    records_array = ActiveRecord::Base.connection.execute(sql)
+    if records_array.empty? 
+      return nil
+    end
+    ids = Array.new
+    records_array.each do |v|
+      ids.push v['hotel_id']
+    end
+    self.find(ids).index_by(&:id).slice(*ids).values
+  end
+
   def get_rating
     comments = self.comments
     if (comments.count == 0)
