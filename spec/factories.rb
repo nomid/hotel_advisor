@@ -14,12 +14,12 @@ FactoryGirl.define do
   		price 100.00
   		adress "Adress"
   		star_rating 5
-      sequence(:user_id) { |n| n}
+      sequence(:user_id) { |n| n }
   	end
 
     factory :comment do
-      sequence(:hotel_id) { |n| n}
-      sequence(:user_id) { |n| n}
+      sequence(:hotel_id) { |n| n }
+      sequence(:user_id) { |n| n }
       rate Random.rand(1..5)
       comment "example comment"
     end

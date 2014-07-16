@@ -22,8 +22,8 @@ describe "StaticPages" do
   end
 
   describe "Pages" do
-    before(:all) { 35.times { FactoryGirl.create(:hotel) } }
-    after(:all)  { Hotel.delete_all }
+    before { 35.times { FactoryGirl.create(:hotel) } }
+    after  { Hotel.delete_all }
 
     describe "Home Page" do
       before do
@@ -43,19 +43,19 @@ describe "StaticPages" do
     end
 
     describe "Top 5 page" do
-      before do 
-        visit top_path
-        35.times { FactoryGirl.create(:hotel) } 
-        35.times { FactoryGirl.create(:user) } 
-      end
       after(:all) do
         Hotel.delete_all 
         User.delete_all
+        Comment.delete_all
       end 
 
       describe 'Random comments' do
-        before { 35.times { FactoryGirl.create(:comment) } }
-        after { Comment.delete_all }
+        before do 
+          35.times { FactoryGirl.create(:hotel) } 
+          35.times { FactoryGirl.create(:user) } 
+          35.times { FactoryGirl.create(:comment) } 
+          visit top_path
+        end  
         it { should_not have_selector('div.pagination') }
         it "should list less 6 hotels" do
           expect(page).to have_css('table.hotel', maximum: 5, minimum: 1)
@@ -63,7 +63,11 @@ describe "StaticPages" do
       end
 
       describe 'Have not comments' do
-        before {visit top_path}
+        before do
+          35.times { FactoryGirl.create(:user) } 
+          35.times { FactoryGirl.create(:hotel) }
+          visit top_path
+        end 
         it 'should display text No rated hotels' do
           expect(page).to have_text('No rated hotels')
         end
@@ -78,13 +82,35 @@ describe "StaticPages" do
           4.times { FactoryGirl.create(:comment, hotel_id: hotel_2.id, rate: 3) }
           visit top_path
         end
-        after { Comment.delete_all }
 
-        it 'hotel with id 2 should be higher then hotel with id 1' do
-          #expect(page).should have_selector("div.top_hotels:first-child")
-          #expect(page).should have_selector(".hotel_title a", text: hotel_2.title)
-          #expect(page).should have_selector("div.top_hotels:nth-child(2) .hotel_title a", text: hotel_1.title)
-          #expect(page).should_not have_text('No rated hotels')
+        it 'hotel_2 should be higher then hotel_1' do
+          page.body.should =~ /#{hotel_2.title}(\S|\s)*#{hotel_1.title}/
+        end
+      end
+
+      describe 'simple ratings' do
+        let(:hotel_1) { FactoryGirl.create(:hotel) }
+        let(:hotel_2) { FactoryGirl.create(:hotel) }
+        let(:hotel_3) { FactoryGirl.create(:hotel) }
+        let(:hotel_4) { FactoryGirl.create(:hotel) }
+        let(:hotel_5) { FactoryGirl.create(:hotel) }
+        let(:hotel_6) { FactoryGirl.create(:hotel) }
+        before do
+          10.times { FactoryGirl.create(:user)}
+          FactoryGirl.create(:comment, hotel_id: hotel_1.id, rate: 1)
+          FactoryGirl.create(:comment, hotel_id: hotel_1.id, rate: 2)
+          FactoryGirl.create(:comment, hotel_id: hotel_2.id, rate: 2)
+          FactoryGirl.create(:comment, hotel_id: hotel_2.id, rate: 3)
+          FactoryGirl.create(:comment, hotel_id: hotel_3.id, rate: 3)
+          FactoryGirl.create(:comment, hotel_id: hotel_3.id, rate: 4)
+          FactoryGirl.create(:comment, hotel_id: hotel_4.id, rate: 4)
+          FactoryGirl.create(:comment, hotel_id: hotel_4.id, rate: 5)
+          FactoryGirl.create(:comment, hotel_id: hotel_5.id, rate: 5)
+          FactoryGirl.create(:comment, hotel_id: hotel_5.id, rate: 5)
+          visit top_path
+        end
+        it 'should be in right order' do
+          page.body.should =~ /#{hotel_5.title}(\S|\s)*#{hotel_4.title}(\S|\s)*#{hotel_3.title}(\S|\s)*#{hotel_2.title}(\S|\s)*#{hotel_1.title}/
         end
       end
     end
