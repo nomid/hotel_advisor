@@ -10,21 +10,14 @@ class Hotel < ActiveRecord::Base
   mount_uploader :photo, PhotoUploader
 
   def self.top_5
-    sql = 'SELECT hotel_id 
-          FROM comments 
-          GROUP BY hotel_id 
-          ORDER BY AVG(rate) DESC, 
-                   COUNT(hotel_id) DESC 
+    sql = 'SELECT hotels.* FROM hotels
+          INNER JOIN comments
+          ON hotels.id = comments.hotel_id
+          GROUP BY comments.hotel_id 
+          ORDER BY AVG(comments.rate) DESC, 
+                   COUNT(comments.hotel_id) DESC 
           LIMIT 5'
-    records_array = ActiveRecord::Base.connection.execute(sql)
-    if records_array.empty? 
-      return nil
-    end
-    ids = Array.new
-    records_array.each do |v|
-      ids.push v['hotel_id']
-    end
-    self.find(ids).index_by(&:id).slice(*ids).values
+    hotels = Hotel.find_by_sql(sql)
   end
 
   def get_rating
