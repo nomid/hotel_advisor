@@ -3,7 +3,7 @@
 <h1>Top hotels</h1>
 
 <div class="top_hotels">
-	<% if @hotels.nil? %>
+	<% if @hotels.empty? %>
 		<h3>No rated hotels</h3>
 	<% else %>
 		<%= render 'hotels' %>	
