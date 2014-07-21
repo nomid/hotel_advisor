@@ -4,7 +4,13 @@
   <%= f.input :breackfest %>
   <%= f.input :room_desc, required: true %>
   <%= f.input :price, required: true %>
-  <%= f.input :adress, required: true %>
+  <%= f.simple_fields_for :adress do |adress| %>
+    <p>Adress:</p> 
+    <%= adress.input :country,  required: true%>
+    <%= adress.input :state, required: false%>
+    <%= adress.input :city, required: true%>
+    <%= adress.input :street, required: true%>
+  <% end %>
   <%= f.input :star_rating, collection: 1..5, as: :radio_buttons, required: true%>
   <%= f.button :submit, required: true %>
   <%= f.input :id, as: :hidden %>

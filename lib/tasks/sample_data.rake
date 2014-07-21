@@ -46,15 +46,15 @@ def make_users
 end
 
 def make_hotels
-  Hotel.create!(title: "Example Hotel",
-                 star_rating: 5,
-                 breackfest: true,
-                 room_desc: "Example desc",
-                 photo: "photo",
-                 price: 100,
-                 adress: "Example adress",
-                 user_id: 1)
-    99.times do |n|
+  #Hotel.create!(title: "Example Hotel",
+  #               star_rating: 5,
+  #               breackfest: true,
+  #               room_desc: "Example desc",
+  #               photo: "photo",
+  #               price: 100,
+  #               user_id: 1)
+  
+    100.times do |n|
       title = "Example Hotel #{n+1}"
       star_rating = Random.rand(1..5)
       breackfest = true
@@ -63,13 +63,16 @@ def make_hotels
       price = 100+n
       adress = "Example adress#{n+1}"
       user_id = Random.rand(1..50)
-      Hotel.create!(title: title,
+      hotel = Hotel.create!(title: title,
                  star_rating: star_rating,
                  breackfest: breackfest,
                  room_desc: room_desc,
                  photo: photo,
                  price: price,
-                 adress: adress,
                  user_id: user_id)
+      hotel.adress = Adress.create!(country: "Ukraine",
+                  state: "example state",
+                  city: "example city",
+                  street: "example street")
     end
 end

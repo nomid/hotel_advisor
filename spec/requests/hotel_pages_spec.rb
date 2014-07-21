@@ -52,7 +52,10 @@ describe "HotelPages" do
     it { expect(page).to have_selector('#hotel_breackfest') }                                             
     it { expect(page).to have_selector('#hotel_room_desc') }
     it { expect(page).to have_selector('#hotel_price') }
-    it { expect(page).to have_selector('#hotel_adress') }
+    it { expect(page).to have_selector('#hotel_adress_attributes_country') }
+    it { expect(page).to have_selector('#hotel_adress_attributes_state') }
+    it { expect(page).to have_selector('#hotel_adress_attributes_city') }
+    it { expect(page).to have_selector('#hotel_adress_attributes_street') }
     it { expect(page).to have_selector('#hotel_star_rating_5') }
     it { expect(page).to have_selector('#hotel_star_rating_4') }
     it { expect(page).to have_selector('#hotel_star_rating_3') }
@@ -66,7 +69,11 @@ describe "HotelPages" do
           fill_in 'hotel_title', with: "Some hotel"
           fill_in 'hotel_room_desc', with: "Example room description"
           fill_in 'hotel_price', with: "123"
-          fill_in 'hotel_adress', with: "Example hotel adress"
+          select 'Albania', :from => 'hotel_adress_attributes_country'
+          #fill_in 'hotel_adress_attributes_country', with: "Example country"
+          fill_in 'hotel_adress_attributes_state', with: "Example state"
+          fill_in 'hotel_adress_attributes_city', with: "Example city"
+          fill_in 'hotel_adress_attributes_street', with: "Example street"
           choose 'hotel_star_rating_2' 
         end
 

@@ -23,18 +23,21 @@ describe HotelsController do
     it 'should display success notice and redirect to my hotels on success create' do
       post 'create', {hotel: {title: 'example title', star_rating: 5,
                               breackfest: true, room_desc: 'room description',
-                              price: 111, adress: 'hotel adress',
+                              price: 111, adress_attributes: { country: "country", state: "state",
+                              city: "city", street: "street" },
                               user_id: user.id} }
       flash[:success].should_not be_nil
       response.should redirect_to(myhotels_hotel_path)
     end
-    it 'should display alert notice and redirect to add hotel on failed create' do
+    it 'should display alert notice and render new template on failed create' do
       post 'create', {hotel: {star_rating: 5,
                               breackfest: true, room_desc: 'room description',
-                              price: 111, adress: 'hotel adress',
+                              price: 111, adress_attributes: { country: "country", state: "state",
+                              city: "city", street: "street" },
                               user_id: user.id} }
       flash[:alert].should_not be_nil
-      response.should redirect_to(new_hotel_path)
+      response.should render_template('new')
+      #response.should redirect_to(new_hotel_path)
     end
   end
 
@@ -64,7 +67,8 @@ describe HotelsController do
     it 'should display success notice and redirect to my hotels page when information valid' do
       post 'update', {hotel: {title: 'example title', star_rating: 5,
                               breackfest: true, room_desc: 'room description',
-                              price: 111, adress: 'hotel adress',
+                              price: 111, adress_attributes: { country: "country", state: "state",
+                              city: "city", street: "street" },
                               user_id: user.id, id: hotel.id} }
       flash[:success].should_not be_nil
       response.should redirect_to(myhotels_hotel_path)
@@ -72,7 +76,8 @@ describe HotelsController do
     it 'should display alert notice and render edit template when information invalid' do
       post 'update', {hotel: {title: 'example title', star_rating: 5,
                               breackfest: true, room_desc: 'room description',
-                              price: -111, adress: 'hotel adress',
+                              price: -111, adress_attributes: { country: "country", state: "state",
+                              city: "city", street: "street" },
                               user_id: user.id, id: hotel.id} }
       flash[:alert].should_not be_nil
       response.should render_template('edit')
@@ -80,7 +85,8 @@ describe HotelsController do
     it 'should display alert notice and redirect to root when edit not own hotel' do
       post 'update', {hotel: {title: 'example title', star_rating: 5,
                               breackfest: true, room_desc: 'room description',
-                              price: 111, adress: 'hotel adress',
+                              price: 111, adress_attributes: { country: "country", state: "state",
+                              city: "city", street: "street" },
                               user_id: user.id, id: not_own_hotel.id} }
       flash[:alert].should_not be_nil
       response.should redirect_to(root_path)

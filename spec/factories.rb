@@ -12,11 +12,16 @@ FactoryGirl.define do
   		room_desc "Room description"
   		photo "Some photo"
   		price 100.00
-  		adress "Adress"
   		star_rating 5
       sequence(:user_id) { |n| n }
+      adress {|n| n.association(:adress)}
   	end
-
+    factory :adress do
+      country "example country"
+      state "example state"
+      city "example city"
+      street "example street"
+    end
     factory :comment do
       sequence(:hotel_id) { |n| n }
       sequence(:user_id) { |n| n }

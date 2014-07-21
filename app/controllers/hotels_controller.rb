@@ -1,6 +1,7 @@
 class HotelsController < ApplicationController
   def new
     @hotel = Hotel.new
+    @hotel.adress = Adress.new
   end  
 
   def show
@@ -11,12 +12,15 @@ class HotelsController < ApplicationController
 
   def create
     @hotel = current_user.hotels.build(hotels_params)
-    if @hotel.save
+    adress = Adress.new(adress_params)
+    if @hotel.save && adress.save
+      @hotel.adress = adress
       flash[:success] = "Hotel created"
       redirect_to myhotels_hotel_path 
     else
       flash[:alert] = "Fill required fields"
-      redirect_to new_hotel_path
+      render 'new'
+      #redirect_to new_hotel_path
     end
   end
 
@@ -36,7 +40,7 @@ class HotelsController < ApplicationController
   def update
     if current_user.hotels.exists?(params[:hotel][:id])
       @hotel = current_user.hotels.find(params[:hotel][:id])
-      if @hotel.update_attributes(hotels_params)
+      if @hotel.update_attributes(hotels_params) && @hotel.adress.update_attributes(adress_params)
             flash[:success] = "Hotel updated"
             redirect_to myhotels_hotel_path
         else
@@ -63,7 +67,12 @@ class HotelsController < ApplicationController
 
   private
     def hotels_params
-          params.require(:hotel).permit(:title, :breackfest, :room_desc,
-                                     :price, :adress, :star_rating, :photo)
-      end
+      params.require(:hotel).permit(:title, :breackfest, :room_desc,
+                                      :price, :star_rating, :photo)
+    end
+
+    def adress_params
+      permitted = params.permit(hotel: [ adress_attributes: [:country, :state, :city, :street]])
+      permitted[:hotel][:adress_attributes]
+    end
 end

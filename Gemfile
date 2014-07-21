@@ -12,6 +12,7 @@ gem 'bootstrap-will_paginate', '0.0.9'
 gem 'devise'
 gem 'simple_form'
 gem 'carrierwave'
+gem 'country_select'
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'

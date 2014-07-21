@@ -10,7 +10,13 @@
 	<span>Stars: <%= '*' * @hotel.star_rating%></span><br/>
 	<span>Breackfest <%= 'not' unless @hotel.breackfest? %> include</span><br/>
 	<span>Price for room: <%= @hotel.price %></span><br/>
-	<span>Adress: <%= @hotel.adress %></span><br/>
+	<span>Adress:</span><br/>
+	<span>Country: <%= @hotel.adress.country %></span><br/>
+	<% unless @hotel.adress.state.empty? %>
+		<span>State: <%= @hotel.adress.state %></span><br/>
+	<% end %>
+	<span>City: <%= @hotel.adress.city %></span><br/>
+	<span>Street: <%= @hotel.adress.street %></span><br/>
 	<div>Room description:<br/><%= @hotel.room_desc%></div><br/>
 </div>
 <div class="comments">

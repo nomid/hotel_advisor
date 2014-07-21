@@ -1,10 +1,12 @@
 class Hotel < ActiveRecord::Base
   belongs_to :user
   has_many :comments, dependent: :destroy
+  has_one :adress, dependent: :destroy
+  accepts_nested_attributes_for :adress, allow_destroy: true
   validates :title, presence: true, uniqueness:{ case_sensitive: false }
   validates :room_desc, presence: true, length: {maximum: 200}
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
-  validates :adress, presence: true, length: {maximum: 60}
+  #validates :adress, presence: true, length: {maximum: 60}
   validates :star_rating, presence: true, inclusion: {in: 1..5}
   validates :user_id, presence: true
   mount_uploader :photo, PhotoUploader

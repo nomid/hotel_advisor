@@ -3,7 +3,8 @@ require 'spec_helper'
 describe Hotel do
 	before do
 	 	@hotel = Hotel.new(title: "Example title", room_desc: "room description",
-                     star_rating: 5, breackfest: true, price: 234, adress: "adress", user_id:1)
+                     star_rating: 5, breackfest: true, price: 234, user_id:1)
+    @hotel.adress = FactoryGirl.create(:adress)
   	end
 
   	subject {@hotel}
@@ -36,20 +37,12 @@ describe Hotel do
       before { @hotel.price = -10 }
       it { should_not be_valid }
     end
-  	describe "when adress is not present" do
-	    before { @hotel.adress = " " }
-	    it { should_not be_valid }
-  	end
   	describe "when star_rating is not present" do
 	    before { @hotel.room_desc = " " }
 	    it { should_not be_valid }
   	end
   	describe "when room_desc is too long" do
 	    before { @hotel.room_desc = "a" * 201 }
-	    it { should_not be_valid }
-  	end
-  	describe "when adress is too long" do
-	    before { @hotel.adress = "a" * 61 }
 	    it { should_not be_valid }
   	end
   	describe "when star rating is not inclusion in 1..5" do
