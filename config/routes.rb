@@ -10,6 +10,11 @@ HotelAdvisor::Application.routes.draw do
   root  'static_pages#home'
   match '/top', to: 'static_pages#top', via: 'get'
   get '/profile' => 'users#show', as: 'user_root'
+  namespace 'admin' do 
+    root to: 'sessions#new'
+    get '/main', to: 'pages#main'
+    resources :sessions, only: [:create, :destroy]
+  end
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

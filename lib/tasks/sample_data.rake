@@ -5,9 +5,14 @@ namespace :db do
     make_users
     make_hotels
     make_comments
+    make_admin
   end
 end
-
+def make_admin
+  Admin.create!(login: 'admin',
+                password: '111111',
+                password_confirmation: '111111')
+end
 def make_comments
   count = 0
   5.times do |u|
