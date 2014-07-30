@@ -13,7 +13,9 @@ HotelAdvisor::Application.routes.draw do
   namespace 'admin' do 
     root to: 'sessions#new'
     get '/main', to: 'pages#main'
-    resources :sessions, only: [:create, :destroy]
+    post '/sessions/create', to: 'sessions#create'
+    delete '/sessions/destroy', to: 'sessions#destroy'
+    resources :users
   end
   
   # The priority is based upon order of creation: first created -> highest priority.

@@ -2,14 +2,20 @@
 <html>
   <head>
     <title>Admin panel</title>
-    <%= stylesheet_link_tag "admin", media: "all",
+    <%= stylesheet_link_tag "application", media: "all",
                                            "data-turbolinks-track" => true %>
-    <%= javascript_include_tag "admin", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
   </head>
   <body>
-    
+    <header>
+      <div class="row span4">
+        <% if admin_signed_in? %>
+          Hello, <%= current_admin.login %>! <%= link_to 'Exit', admin_sessions_destroy_path, method: 'delete' %> 
+        <% end %>
+      </div>  
+    </header>
     <div class="container">
       <%= yield %>
       <%= debug(params) if Rails.env.development? %>

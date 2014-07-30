@@ -1,4 +1,5 @@
 class HotelsController < ApplicationController
+  before_action :check_auth, only: [:new, :myhotels, :edit, :update, :destroy]
   def new
     @hotel = Hotel.new
     @hotel.adress = Adress.new
@@ -74,5 +75,12 @@ class HotelsController < ApplicationController
     def adress_params
       permitted = params.permit(hotel: [ adress_attributes: [:country, :state, :city, :street]])
       permitted[:hotel][:adress_attributes]
+    end
+
+    def check_auth
+      unless signed_in?
+        flash[:notice] = 'Please Sign in'
+        redirect_to new_user_session_path
+      end
     end
 end

@@ -32,7 +32,7 @@ module Admin::SessionsHelper
       end
     end
   
-    def sign_out
+    def admin_sign_out
       current_admin.update_attribute(:remember_token,
                                     Admin.encrypt(Admin.new_remember_token))
       cookies.delete(:remember_token)

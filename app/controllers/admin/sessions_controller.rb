@@ -19,7 +19,7 @@ class Admin::SessionsController < AdminController
   end
 
   def destroy
-    sign_out
+    admin_sign_out
     redirect_to root_url
   end
 end
