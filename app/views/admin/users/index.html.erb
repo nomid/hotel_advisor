@@ -22,12 +22,29 @@ filter by email:<input type="text" id="filter_by_email" />
 <script type="text/javascript">
 	jQuery(document).ready(function(){
 		$ = jQuery
-		$('#filter_by_name').bind('keyup', function(){
-			var del = (~location.href.indexOf('?') == 0) ? '?' : '&';
-			$.get(location.href + del + 'filter_by_name=' + this.value, 
-				function(data){
-					$('#users_table').html($(data).find('#users_table').html())
+		var ajax_filter = function(input, filter_by){
+			var self = this,
+				del = (~location.href.indexOf('?') == 0) ? '?' : '&',
+				url = location.href + del + filter_by + '=' + input.value,
+				key;
+
+			if(!$.isEmptyObject(ajax_filter.memory)){
+				for(key in ajax_filter.memory){
+					if(key === filter_by) continue
+					url += '&' + key + '=' + ajax_filter.memory[key];
+				}	
+			}
+			ajax_filter.memory[filter_by] =  input.value;
+			$.get(url, function(data){
+				$('#users_table').html($(data).find('#users_table').html());
 			})
+		}
+		ajax_filter.memory = {};
+		$('#filter_by_name').bind('keyup', function(){
+			ajax_filter(this, 'filter_by_name');
+		})
+		$('#filter_by_email').bind('keyup', function(){
+			ajax_filter(this, 'filter_by_email');
 		})
 	})
 </script>

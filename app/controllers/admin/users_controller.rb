@@ -9,10 +9,13 @@ class Admin::UsersController < AdminController
       @users = User.all
       #@users = User.paginate(page:params[:page]).all
     end
-    unless params[:filter_by_name].nil?
+    if params.has_key?(:filter_by_name) || params.has_key?(:filter_by_email)
+      filter_by_name =  params.has_key?(:filter_by_name) ? params[:filter_by_name].downcase : ''
+      filter_by_email =  params.has_key?(:filter_by_email) ? params[:filter_by_email].downcase : ''
+      
       new_users = []
       @users.each do |user|
-        new_users << user if user.username.include? params[:filter_by_name]
+        new_users << user if (user.username.downcase.include?(filter_by_name) && user.email.downcase.include?(filter_by_email))
       end
       if new_users.any?
         @users = new_users
