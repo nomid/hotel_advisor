@@ -12,7 +12,11 @@
     <header>
       <div class="row span4">
         <% if admin_signed_in? %>
-          Hello, <%= current_admin.login %>! <%= link_to 'Exit', admin_sessions_destroy_path, method: 'delete' %> 
+          Hello, <%= current_admin.login %>! <%= link_to 'Exit', admin_sessions_destroy_path, method: 'delete' %><br/>
+          <%= link_to 'main', admin_main_path %><br/>
+          <%= link_to 'users management', admin_users_path %><br/>
+          <%= link_to 'hotels management', admin_hotels_path %><br/>
+          <%= link_to 'view site', root_path %><br/>
         <% end %>
       </div>  
       <% flash.each do |key, value| %>

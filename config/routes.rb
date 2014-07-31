@@ -15,7 +15,7 @@ HotelAdvisor::Application.routes.draw do
     get '/main', to: 'pages#main'
     post '/sessions/create', to: 'sessions#create'
     delete '/sessions/destroy', to: 'sessions#destroy'
-    resources :users
+    resources :users, :hotels
   end
   
   # The priority is based upon order of creation: first created -> highest priority.

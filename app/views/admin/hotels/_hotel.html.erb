@@ -1,0 +1,12 @@
+<tr>
+	<td><%= hotel.id %></td>
+	<td><%= hotel.title %></td>
+	<td><%= hotel.user.username %></td>
+	<td><%= hotel.comments.count %></td>
+	<td><%= hotel.status %></td>
+	<% if hotel.status == 'p' %>
+		<td><%= link_to 'approve', admin_hotel_path(hotel, new_status: 'a'), method: :patch %> / <%= link_to 'reject', admin_hotel_path(hotel, new_status: 'r'), method: :patch %></td>
+	<% else %>
+		<td></td>
+	<% end %>
+</tr>

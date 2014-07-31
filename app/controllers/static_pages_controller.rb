@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
   include StaticPagesHelper
   def home
-    @hotels = Hotel.paginate(page: params[:page]).order('title')
+    @hotels = Hotel.paginate(page: params[:page]).where(status: 'a').order('title')
   end
 
   def top

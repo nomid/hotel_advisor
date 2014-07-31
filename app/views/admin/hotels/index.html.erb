@@ -1,0 +1,54 @@
+filter by status: 
+<select id="filter_by_status">
+	<option value="all">all</option>
+	<option value="p">pending</option>
+	<option value="a">approved</option>
+	<option value="r">rejected</option>	
+</select>
+<table id="hotels_table">
+	<thead>
+		<td>id</td>
+		<td>title</td>
+		<td>user</td>
+		<td>rates</td>
+		<td>status</td>
+		<td>action</td>
+	</thead>
+	<% if @hotels.any? %>
+		<%= render @hotels %>
+	<% else %>
+		<tr>
+			<td colspan="6">
+				no hotels find
+			</td>
+		</tr>
+	<% end %>
+</table>
+
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		$ = jQuery
+		var ajax_filter = function(input, filter_by){
+			var self = this,
+				del = (~location.href.indexOf('?') == 0) ? '?' : '&',
+				url = location.href + del + filter_by + '=' + input.value,
+				key;
+
+			if(!$.isEmptyObject(ajax_filter.memory)){
+				for(key in ajax_filter.memory){
+					if(key === filter_by) continue
+					url += '&' + key + '=' + ajax_filter.memory[key];
+				}	
+			}
+			ajax_filter.memory[filter_by] =  input.value;
+			$.get(url, function(data){
+				$('#hotels_table').html($(data).find('#hotels_table').html());
+			})
+		}
+		ajax_filter.memory = {};
+		$('#filter_by_status').bind('change', function(){
+			ajax_filter(this, 'filter_by_status');
+		})
+
+	})
+</script>
