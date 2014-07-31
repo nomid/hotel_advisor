@@ -1,0 +1,6 @@
+<%= simple_form_for @user, url: @edit? admin_user_path : admin_users_path do |f| %>
+  <%= f.input :username, required: true %>
+  <%= f.input :email, required: true %>
+  <%= f.input :password, required: true, as: :string %>
+  <%= f.button :submit, required: true %>
+<% end %>

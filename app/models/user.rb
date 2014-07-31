@@ -35,4 +35,5 @@ class User < ActiveRecord::Base
     joins(:comments).
     group('comments.user_id').
     order('comments_count')
+
 end

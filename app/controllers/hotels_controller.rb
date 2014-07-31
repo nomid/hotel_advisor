@@ -19,7 +19,7 @@ class HotelsController < ApplicationController
       flash[:success] = "Hotel created"
       redirect_to myhotels_hotel_path 
     else
-      flash[:alert] = "Fill required fields"
+      flash.now[:alert] = "Fill required fields"
       render 'new'
       #redirect_to new_hotel_path
     end

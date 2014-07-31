@@ -15,6 +15,9 @@
           Hello, <%= current_admin.login %>! <%= link_to 'Exit', admin_sessions_destroy_path, method: 'delete' %> 
         <% end %>
       </div>  
+      <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+      <% end %>
     </header>
     <div class="container">
       <%= yield %>

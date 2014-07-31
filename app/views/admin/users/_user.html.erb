@@ -1,8 +1,8 @@
 <tr>
 	<td><%= user.id %></td>
-	<td><%= user.username %></td>
+	<td><%= link_to user.username, edit_admin_user_path(user) %></td>
 	<td><%= user.email %></td>
 	<td><%= user.hotels.count %></td>
 	<td><%= user.comments.count %></td>
-	<td><%= link_to "delete", registration_path(user), data: { confirm: "Are you sure?" }, method: :delete%></td>
+	<td><%= link_to "delete", admin_user_path(user), data: { confirm: "Are you sure?" }, method: :delete%></td>
 </tr>
