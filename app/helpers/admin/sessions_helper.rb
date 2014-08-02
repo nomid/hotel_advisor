@@ -1,4 +1,3 @@
-
 module Admin::SessionsHelper
 
 	def admin_sign_in(admin)

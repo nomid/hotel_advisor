@@ -13,9 +13,9 @@ class Hotel < ActiveRecord::Base
 
   def self.top_5
     sql = 'SELECT hotels.* FROM hotels
-          WHERE hotels.status = \'a\'
           INNER JOIN comments
           ON hotels.id = comments.hotel_id
+          WHERE hotels.status = \'a\'
           GROUP BY comments.hotel_id 
           ORDER BY AVG(comments.rate) DESC, 
                    COUNT(comments.hotel_id) DESC 
@@ -33,6 +33,7 @@ class Hotel < ActiveRecord::Base
       'pending'
     end
   end
+  
   def get_rating
     comments = self.comments
     if (comments.count == 0)

@@ -11,7 +11,6 @@ class Admin::SessionsController < AdminController
     if admin && admin.authenticate(params[:admin][:password])
       admin_sign_in admin
       redirect_to admin_main_path
-      #redirect_back_or admin
     else
       flash.now[:error] = 'Invalid email/password combination' # Not quite right!
       render 'new'
