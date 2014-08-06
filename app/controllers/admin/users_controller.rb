@@ -3,16 +3,17 @@ class Admin::UsersController < AdminController
 
   def index
     unless params[:sort_by].nil?
-      #todo: add paginate
       @users = User.send(params[:sort_by])
     else
       @users = User.all
-      #@users = User.paginate(page:params[:page]).all
     end
     if params.has_key?(:filter_by_name) || params.has_key?(:filter_by_email)
       filter_by_name =  params.has_key?(:filter_by_name) ? params[:filter_by_name].downcase : ''
       filter_by_email =  params.has_key?(:filter_by_email) ? params[:filter_by_email].downcase : ''
-      
+      if filter_by_email=='' && filter_by_name==''
+        @users = User.all.paginate(page:params[:page])
+        return
+      end
       new_users = []
       @users.each do |user|
         new_users << user if (user.username.downcase.include?(filter_by_name) && user.email.downcase.include?(filter_by_email))
@@ -22,6 +23,9 @@ class Admin::UsersController < AdminController
       else
         @users = nil
       end
+    end
+    unless @users.nil?
+      @users = @users.paginate(page: params[:page])
     end
 
   end

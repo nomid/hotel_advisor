@@ -3,9 +3,9 @@ class Admin::HotelsController < AdminController
 
   def index 
     if (params.has_key?(:filter_by_status) && params[:filter_by_status] != 'all')
-      @hotels = Hotel.where(status: params[:filter_by_status])
+      @hotels = Hotel.where(status: params[:filter_by_status]).paginate(page:params[:page])
     else
-      @hotels = Hotel.all
+      @hotels = Hotel.all.paginate(page:params[:page])
     end
   end
 

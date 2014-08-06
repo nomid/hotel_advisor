@@ -12,12 +12,20 @@ filter by email:<input type="text" id="filter_by_email" />
 		<td>delete user</td>
 	</thead>
 	<% if @users.nil? %>
-		<td colspan="6">No users find</td>
+		<tr>
+			<td colspan="6">No users find</td>			
+		</tr>
 	<% else %>
 		<%= render @users %>	
+		<tr>
+			<td colspan="6">
+				<%= will_paginate %>
+				<%#= will_paginate @test%>
+			</td>
+		</tr>
 	<% end %>
 </table>
-<%#= will_paginate %>
+
 
 <script type="text/javascript">
 	jQuery(document).ready(function(){

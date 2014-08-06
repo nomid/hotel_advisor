@@ -1,9 +1,9 @@
 filter by status: 
 <select id="filter_by_status">
 	<option value="all">all</option>
-	<option value="p">pending</option>
-	<option value="a">approved</option>
-	<option value="r">rejected</option>	
+	<option value="p"<%= 'selected' if params[:filter_by_status]=='p' %>>pending</option>
+	<option value="a"<%= 'selected' if params[:filter_by_status]=='a' %>>approved</option>
+	<option value="r"<%= 'selected' if params[:filter_by_status]=='r' %>>rejected</option>	
 </select>
 <table id="hotels_table">
 	<thead>
@@ -16,6 +16,11 @@ filter by status:
 	</thead>
 	<% if @hotels.any? %>
 		<%= render @hotels %>
+		<tr>
+			<td colspan="6">
+				<%= will_paginate %>
+			</td>
+		</tr>
 	<% else %>
 		<tr>
 			<td colspan="6">
@@ -24,7 +29,6 @@ filter by status:
 		</tr>
 	<% end %>
 </table>
-<%#= will_paginate %>
 
 <script type="text/javascript">
 	jQuery(document).ready(function(){
