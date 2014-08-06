@@ -3,9 +3,11 @@ class Admin::UsersController < AdminController
 
   def index
     unless params[:sort_by].nil?
-      @users = User.send(params[:sort_by]).paginate(page:params[:page])
+      #todo: add paginate
+      @users = User.send(params[:sort_by])
     else
-      @users = User.paginate(page:params[:page]).all
+      @users = User.all
+      #@users = User.paginate(page:params[:page]).all
     end
     if params.has_key?(:filter_by_name) || params.has_key?(:filter_by_email)
       filter_by_name =  params.has_key?(:filter_by_name) ? params[:filter_by_name].downcase : ''

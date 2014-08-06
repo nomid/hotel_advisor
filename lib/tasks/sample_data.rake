@@ -35,8 +35,8 @@ def make_comments
 end
 
 def make_users
-  admin = User.create!(username:     "Example User",
-                       email:    "login@login.ru",
+  admin = User.create!(username:     "My User",
+                       email:    "nomid21@gmail.com",
                        password: "11111111",
                        password_confirmation: "11111111")
   49.times do |n|

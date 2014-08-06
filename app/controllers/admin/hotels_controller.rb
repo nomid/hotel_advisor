@@ -12,7 +12,13 @@ class Admin::HotelsController < AdminController
   def update
     if params.has_key?(:new_status)
       hotel = Hotel.find(params[:id])
-      flash_message = params[:new_status] == 'a' ? 'hotel approved' : 'hotel rejected'
+      if params[:new_status] == 'a'
+        flash_message = 'hotel approved'
+        UserMailer.approve_hotel(hotel).deliver
+      elsif params[:new_status] == 'r'
+        flash_message = 'hotel rejected'
+        UserMailer.reject_hotel(hotel).deliver
+      end
       hotel.update_attribute('status', params[:new_status])
       flash[:success] = flash_message
       redirect_to admin_hotels_path

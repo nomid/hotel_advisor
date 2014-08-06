@@ -13,9 +13,10 @@ class HotelsController < ApplicationController
 
   def create
     @hotel = current_user.hotels.build(hotels_params)
-    adress = Adress.new(adress_params)
-    if @hotel.save && adress.save
-      @hotel.adress = adress
+    @hotel.adress = Adress.new(adress_params)
+    #@adress = Adress.new(adress_params)
+    if @hotel.save #&& @adress.save
+      #@hotel.adress = @adress
       flash[:success] = "Hotel created"
       redirect_to myhotels_hotel_path 
     else
