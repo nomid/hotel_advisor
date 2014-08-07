@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe "HotelPages" do
+describe "HotelPages", type: :request do
   subject {page}
   let(:hotel) { FactoryGirl.create(:hotel) }
   let(:user) { FactoryGirl.create(:user) }

@@ -1,11 +1,19 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe HotelsController do
+describe HotelsController, type: :controller do
   let(:user) { FactoryGirl.create(:user) }
   let(:hotel) { FactoryGirl.create(:hotel, user_id: user.id) }
   let(:not_own_hotel) { FactoryGirl.create(:hotel, user_id: user.id+1) }
-  describe 'new' do
-    it 'should render new template' do
+  describe 'new for not authorized' do
+    it 'should redirect to sign in and show alert notice' do
+      get 'new'
+      response.should redirect_to(new_user_session_path)
+      flash[:notice].should_not be_nil
+    end
+  end
+  describe 'new for authorized' do
+    before { sign_in user }
+    it 'should  render new template' do
       get 'new'
       response.should render_template('new')
     end

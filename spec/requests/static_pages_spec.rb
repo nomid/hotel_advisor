@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 include StaticPagesHelper
-describe "StaticPages" do
+describe "StaticPages", type: :request do
   subject {page}
 
   before do
@@ -22,7 +22,7 @@ describe "StaticPages" do
   end
 
   describe "Pages" do
-    before { 35.times { FactoryGirl.create(:hotel) } }
+    before { 35.times { FactoryGirl.create(:hotel, status: 'a') } }
     after  { Hotel.delete_all }
 
     describe "Home Page" do
@@ -74,8 +74,8 @@ describe "StaticPages" do
       end 
 
       describe 'boundary ratings' do
-        let(:hotel_1) { FactoryGirl.create(:hotel) }
-        let(:hotel_2) { FactoryGirl.create(:hotel) }
+        let(:hotel_1) { FactoryGirl.create(:hotel, status: 'a') }
+        let(:hotel_2) { FactoryGirl.create(:hotel, status: 'a') }
         before do
           7.times { FactoryGirl.create(:user)}
           3.times { FactoryGirl.create(:comment, hotel_id: hotel_1.id, rate: 3) }
@@ -89,12 +89,12 @@ describe "StaticPages" do
       end
 
       describe 'simple ratings' do
-        let(:hotel_1) { FactoryGirl.create(:hotel) }
-        let(:hotel_2) { FactoryGirl.create(:hotel) }
-        let(:hotel_3) { FactoryGirl.create(:hotel) }
-        let(:hotel_4) { FactoryGirl.create(:hotel) }
-        let(:hotel_5) { FactoryGirl.create(:hotel) }
-        let(:hotel_6) { FactoryGirl.create(:hotel) }
+        let(:hotel_1) { FactoryGirl.create(:hotel, status: 'a') }
+        let(:hotel_2) { FactoryGirl.create(:hotel, status: 'a') }
+        let(:hotel_3) { FactoryGirl.create(:hotel, status: 'a') }
+        let(:hotel_4) { FactoryGirl.create(:hotel, status: 'a') }
+        let(:hotel_5) { FactoryGirl.create(:hotel, status: 'a') }
+        let(:hotel_6) { FactoryGirl.create(:hotel, status: 'a') }
         before do
           10.times { FactoryGirl.create(:user)}
           FactoryGirl.create(:comment, hotel_id: hotel_1.id, rate: 1)

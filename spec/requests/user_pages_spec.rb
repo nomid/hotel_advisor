@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe "UserPages" do
+describe "UserPages", type: :request do
   subject {page}
   let(:user) { FactoryGirl.create(:user) }
   before do

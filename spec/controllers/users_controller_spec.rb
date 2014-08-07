@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe UsersController do
+describe UsersController, type: :controller do
   let(:user) { FactoryGirl.create(:user) }
   before { sign_in user }
 

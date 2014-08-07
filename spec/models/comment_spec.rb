@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Comment do
+describe Comment, type: :model do
   before do
     @comment = Comment.new(user_id: 1, hotel_id: 1,
                      comment: "Example comment", rate: 4)

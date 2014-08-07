@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Hotel do
+describe Hotel, type: :model do
 	before do
 	 	@hotel = Hotel.new(title: "Example title", room_desc: "room description",
                      star_rating: 5, breackfest: true, price: 234, user_id:1)

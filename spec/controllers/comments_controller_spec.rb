@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe CommentsController do
+describe CommentsController, type: :controller do
   let(:user) { FactoryGirl.create(:user) }
   let(:hotel) { FactoryGirl.create(:hotel) }
   before { sign_in user }

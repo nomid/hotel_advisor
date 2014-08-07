@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Adress do
+describe Adress, type: :model do
   before do
     @hotel = FactoryGirl.create(:hotel)
   end
