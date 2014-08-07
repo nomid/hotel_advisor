@@ -1,10 +1,16 @@
 FactoryGirl.define do
   	factory :user do
-	    sequence(:username)  { |n| "Person #{n}" }
-	    sequence(:email) { |n| "person_#{n}@example.com"}
-	    password "foobar111"
-	    password_confirmation "foobar111"
-  	end
+      sequence(:username)  { |n| "Person #{n}" }
+      sequence(:email) { |n| "person_#{n}@example.com"}
+      password "foobar111"
+      password_confirmation "foobar111"
+    end
+
+    factory :admin do
+      login "admin"
+      password "111111"
+      password_confirmation "111111"
+    end
 
   	factory :hotel do
   		sequence(:title)  { |n| "Hotel #{n}" }

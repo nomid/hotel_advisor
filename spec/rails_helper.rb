@@ -43,5 +43,6 @@ RSpec.configure do |config|
   #config.include Devise::TestHelpers, type: :controller
 
   config.include(MailerMacros)
+  config.include(ControllerMacros, :type => :controller)
   config.before(:each) { reset_email }
 end
