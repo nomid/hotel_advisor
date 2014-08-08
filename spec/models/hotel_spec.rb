@@ -18,6 +18,7 @@ describe Hotel, type: :model do
   	it { should respond_to(:adress) }
   	it { should respond_to(:user) }
   	it { should respond_to(:comments) }
+    it { should respond_to(:status) }
 
   	it { should be_valid }
 

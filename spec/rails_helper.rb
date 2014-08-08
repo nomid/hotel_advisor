@@ -44,5 +44,6 @@ RSpec.configure do |config|
 
   config.include(MailerMacros)
   config.include(ControllerMacros, :type => :controller)
+  config.include(Utilites, :type => :request)
   config.before(:each) { reset_email }
 end

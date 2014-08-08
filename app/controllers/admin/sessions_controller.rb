@@ -7,13 +7,14 @@ class Admin::SessionsController < AdminController
   end
 
   def create
-    admin = Admin.find_by(login: params[:admin][:login].downcase)
-    if admin && admin.authenticate(params[:admin][:password])
-      admin_sign_in admin
+    @admin = Admin.find_by(login: params[:admin][:login].downcase)
+    if @admin && @admin.authenticate(params[:admin][:password])
+      admin_sign_in @admin
       redirect_to admin_main_path
     else
-      flash.now[:error] = 'Invalid email/password combination' # Not quite right!
-      render 'new'
+      flash[:error] = 'Invalid email/password combination' # Not quite right!
+      redirect_to admin_root_path
+      #render 'new'
     end
   end
 

@@ -109,12 +109,12 @@ describe "HotelPages", type: :request do
     end
 
     it "should contains my hotels" do
-        hotels = user.hotels
+      hotels = user.hotels
       hotels.each do |hotel|
-              expect(page).to have_selector('table .hotel_title a', text: hotel.title)
-              it { should have_link("edit", href: edit_hotel_path(hotel)) }
-              it { should have_link("delete", href: hotel) }
-          end
+          expect(page).to have_selector('table .hotel_title a', text: hotel.title)
+          it { should have_link("edit", href: edit_hotel_path(hotel)) }
+          it { should have_link("delete", href: hotel) }
+      end
     end
   end
 end
